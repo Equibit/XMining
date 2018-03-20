@@ -1,0 +1,7 @@
+# make all Windows scripts have CRLF on checkout
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# make all Linux scripts have LF on checkout
+*.sh text eol=lf
+*.m4 text eol=lf
