@@ -1,6 +1,8 @@
 # use Ubuntu base image
 FROM ubuntu:16.04
 
+USER root
+
 # install packages needed for the build environment
 RUN apt-get update && apt-get install -y autoconf
 RUN apt-get update && apt-get install -y libtool
@@ -12,3 +14,11 @@ RUN apt-get update && apt-get install -y libjansson-dev
 RUN apt-get update && apt-get install -y libevent-dev
 RUN apt-get update && apt-get install -y libcurl4-gnutls-dev
 RUN apt-get clean
+
+WORKDIR /root
+
+RUN git clone --recurse-submodules -b eqb-testnet https://Equibit:f41c78627c23717323d6dc2a83fe9193b09b13f7@github.com/Equibit/EQB-Mining.git
+
+RUN cd /root/EQB-Mining/scripts/ubuntu && \
+    ls -ltr && chmod +x ./build.sh && \
+    ./build.sh 
