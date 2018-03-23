@@ -431,6 +431,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/libblkmaker
     ${CMAKE_SOURCE_DIR}/libbase58
     ${CMAKE_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/cmake/windows/
     ${CMAKE_CURRENT_BINARY_DIR}
     )
 

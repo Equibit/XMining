@@ -41,6 +41,10 @@ if (MSVC)
         "
         )
 
+    add_definitions(-Dstrcasecmp=_stricmp)
+    add_definitions(-Dstrncasecmp=_strnicmp)
+    add_definitions(-Dstrtok_r=strtok_s)
+
     set (CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   ${compiler_flags} ${definitions} ${disabled_warnings}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${compiler_flags} ${definitions} ${disabled_warnings}")
 
