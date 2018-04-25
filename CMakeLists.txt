@@ -17,6 +17,17 @@ include (cmake/macros)
 add_subdirectory (scripts)
 add_subdirectory (cmake)
 
+set (CMAKE_PREFIX_PATH
+    "${THIRDPARTY_DIRECTORY}/curl"
+    "${THIRDPARTY_DIRECTORY}/jansson"
+    "${THIRDPARTY_DIRECTORY}/dirent/include"
+    "${THIRDPARTY_DIRECTORY}/uthash/src"
+    "${THIRDPARTY_DIRECTORY}/pthread/pthread-win32-master"
+    )
+
+find_package(curl REQUIRED)
+find_package(jansson REQUIRED)
+
 set (TARGET_NAME root_folder)
 
 set (source_files
@@ -433,6 +444,11 @@ include_directories(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/cmake/windows/
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_PREFIX_PATH}
+    ${CURL_INCLUDE_DIRS}
+    ${DIRENT_INCLUDE_DIR}
+    ${JANSSON_INCLUDE_DIRS}
+    ${UTHASH_INCLUDE_DIR}
     )
 
 set (TARGET_NAME blkmaker)
