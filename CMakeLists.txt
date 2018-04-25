@@ -485,3 +485,12 @@ target_link_libraries (${TARGET_NAME}
 
 add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${THIRDPARTY_DIRECTORY}/curl/bin/libcurl-d.dll $<TARGET_FILE_DIR:${TARGET_NAME}>)
 add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${THIRDPARTY_DIRECTORY}/pthread/pthread-win32-master/bin/Win32_MSVC2015.Debug/pthread_dll.dll $<TARGET_FILE_DIR:${TARGET_NAME}>)
+
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/diablo.cl  $<TARGET_FILE_DIR:${TARGET_NAME}>)
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/diakgcn.cl $<TARGET_FILE_DIR:${TARGET_NAME}>)
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/phatk.cl   $<TARGET_FILE_DIR:${TARGET_NAME}>)
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/poclbm.cl  $<TARGET_FILE_DIR:${TARGET_NAME}>)
+
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/psw.cl     $<TARGET_FILE_DIR:${TARGET_NAME}>)
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/scrypt.cl  $<TARGET_FILE_DIR:${TARGET_NAME}>)
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/opencl/zuikkis.cl $<TARGET_FILE_DIR:${TARGET_NAME}>)
