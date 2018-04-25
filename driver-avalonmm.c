@@ -62,7 +62,7 @@ enum avalonmm_reply {
 static
 bool avalonmm_write_cmd(const int fd, const enum avalonmm_cmd cmd, const void *data, size_t datasz)
 {
-	uint8_t packets = ((datasz + AVALONMM_PKT_DATA_SIZE - 1) / AVALONMM_PKT_DATA_SIZE) ?: 1;
+	uint8_t packets = ((datasz + AVALONMM_PKT_DATA_SIZE - 1) / AVALONMM_PKT_DATA_SIZE) ? ((datasz + AVALONMM_PKT_DATA_SIZE - 1) / AVALONMM_PKT_DATA_SIZE) : 1;
 	uint8_t pkt[AVALONMM_PKT_SIZE] = {'A', 'V', cmd, 1, packets};
 	uint16_t crc;
 	ssize_t r;

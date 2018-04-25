@@ -57,7 +57,7 @@ extern void lowlevel_scan_free();
 
 extern struct lowlevel_device_info *lowlevel_ref(const struct lowlevel_device_info *);
 #define lowlevel_claim(drv, verbose, info)  \
-	bfg_claim_any(drv, (verbose) ? ((info)->path ?: "") : NULL, (info)->devid)
+	bfg_claim_any(drv, (verbose) ? ((info)->path ? (info)->path: "") : NULL, (info)->devid)
 extern void lowlevel_devinfo_semicpy(struct lowlevel_device_info *dst, const struct lowlevel_device_info *src);
 extern void lowlevel_devinfo_free(struct lowlevel_device_info *);
 

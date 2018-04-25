@@ -50,7 +50,7 @@ struct MHD_Response *getwork_gen_error(int16_t errcode, const char *errmsg, cons
 {
 	size_t replysz = 0x40 + strlen(errmsg) + idstr_sz;
 	char * const reply = malloc(replysz);
-	replysz = snprintf(reply, replysz, "{\"result\":null,\"error\":{\"code\":%d,\"message\":\"%s\"},\"id\":%s}", errcode, errmsg, idstr ?: "0");
+	replysz = snprintf(reply, replysz, "{\"result\":null,\"error\":{\"code\":%d,\"message\":\"%s\"},\"id\":%s}", errcode, errmsg, idstr ? idstr: "0");
 	struct MHD_Response * const resp = MHD_create_response_from_buffer(replysz, reply, MHD_RESPMEM_MUST_FREE);
 	getwork_prepare_resp(resp, conn);
 	return resp;
@@ -186,7 +186,7 @@ int handle_getwork(struct MHD_Connection *conn, bytes_t *upbuf)
 		
 		work = get_work(thr);
 		const struct mining_algorithm * const malgo = work_mining_algorithm(work);
-		work->nonce_diff = client->desired_share_pdiff ?: malgo->reasonable_low_nonce_diff;
+		work->nonce_diff = client->desired_share_pdiff ? client->desired_share_pdiff : malgo->reasonable_low_nonce_diff;
 		if (work->nonce_diff > work->work_difficulty)
 			work->nonce_diff = work->work_difficulty;
 		
@@ -200,7 +200,7 @@ int handle_getwork(struct MHD_Connection *conn, bytes_t *upbuf)
 		memcpy(&reply[364], "\",\"midstate\":\"", 14);
 		bin2hex(&reply[378], work->midstate, 32);
 		memcpy(&reply[442], "\",\"hash1\":\"00000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000010000\"},\"id\":", 147);
-		memcpy(&reply[589], idstr ?: "0", idstr_sz);
+		memcpy(&reply[589], idstr ? idstr : "0", idstr_sz);
 		memcpy(&reply[589 + idstr_sz], "}", 1);
 #ifdef USE_SCRYPT
 		if (malgo->algo == POW_SCRYPT)

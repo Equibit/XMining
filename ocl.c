@@ -393,7 +393,7 @@ cl_int bfg_clBuildProgram(cl_program * const program, const cl_device_id devid, 
 		size_t logSize;
 		status = clGetProgramBuildInfo(*program, devid, CL_PROGRAM_BUILD_LOG, 0, NULL, &logSize);
 		
-		char *log = malloc(logSize ?: 1);
+		char *log = malloc(logSize ? logSize : 1);
 		status = clGetProgramBuildInfo(*program, devid, CL_PROGRAM_BUILD_LOG, logSize, log, NULL);
 		if (logSize > 0 && log[0])
 			applog(LOG_ERR, "%s", log);

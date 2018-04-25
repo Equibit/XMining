@@ -82,8 +82,8 @@ FILE *open_xilinx_bitstream(const char *dname, const char *repr, const char *fwf
 	applog(LOG_DEBUG, "%s: Firmware file %s info:",
 	       repr, fwfile);
 	applog(LOG_DEBUG, "  Design name: %s", buf);
-	p = strrchr(buf, ';') ?: buf;
-	p = strrchr(buf, '=') ?: p;
+	p = strrchr(buf, ';') ? strrchr(buf, ';') : buf;
+	p = strrchr(buf, '=') ? strrchr(buf, '=') : p;
 	if (p[0] == '=')
 		++p;
 	unsigned long fwusercode = (unsigned long)strtoll(p, &p, 16);

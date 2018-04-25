@@ -49,7 +49,7 @@ ssize_t keep_reading(int prio, int fd, void *buf, size_t count)
 		if (unlikely(r <= 0))
 		{
 			applog(prio, "Read of fd %d returned %d", fd, (int)r);
-			return rv ?: r;
+			return rv ? rv : r;
 		}
 		rv += r;
 		count -= r;

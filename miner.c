@@ -639,8 +639,8 @@ bool cgpu_match(const char * const pattern, const struct cgpu_info * const cgpu)
 		const size_t serlen = (p - ser);
 		p = "";
 		n = n2 = 0;
-		const char * const devpath = cgpu->device_path ?: "";
-		const char * const devser = cgpu->dev_serial ?: "";
+		const char * const devpath = cgpu->device_path ? cgpu->device_path : "";
+		const char * const devser = cgpu->dev_serial ? cgpu->dev_serial : "";
 		if ((!strncmp(devpath, ser, serlen)) && devpath[serlen] == '\0')
 		{}  // Match
 		else
@@ -1904,7 +1904,7 @@ const char *set_goal_params(struct mining_goal_info * const goal, char *arg)
 		enum bfg_set_device_replytype success;
 		const char * const emsg = goal_set(goal, param, val, &replybuf, &success);
 		if (success != SDR_OK)
-			return emsg ?: "Error setting goal param";
+			return emsg ? emsg : "Error setting goal param";
 	}
 	bytes_free(&replybuf);
 	return NULL;
@@ -5785,7 +5785,7 @@ double target_diff(const unsigned char *target)
 	for (i = 31; i >= 0; --i)
 		targ = (targ * 0x100) + target[i];
 
-	return DIFFEXACTONE / (targ ?: 1);
+	return DIFFEXACTONE / (targ ? targ : 1);
 }
 
 /*
@@ -9031,7 +9031,7 @@ static void hashmeter(int thr_id, struct timeval *diff,
 	/* So we can call hashmeter from a non worker thread */
 	if (thr_id >= 0) {
 		struct cgpu_info *cgpu = thr->cgpu;
-		int threadobj = cgpu->threads ?: 1;
+		int threadobj = cgpu->threads ? cgpu->threads : 1;
 		double thread_rolling = 0.0;
 		int i;
 
@@ -11011,7 +11011,7 @@ void flush_queue(struct cgpu_info *cgpu)
  * directly. */
 void hash_queued_work(struct thr_info *mythr)
 {
-	const long cycle = opt_log_interval / 5 ? : 1;
+	const long cycle = opt_log_interval / 5 ? opt_log_interval / 5 : 1;
 	struct timeval tv_start = {0, 0}, tv_end;
 	struct cgpu_info *cgpu = mythr->cgpu;
 	struct device_drv *drv = cgpu->drv;
@@ -11489,7 +11489,7 @@ void proc_enable(struct cgpu_info *cgpu)
 	int j;
 
 	cgpu->deven = DEV_ENABLED;
-	for (j = cgpu->threads ?: 1; j--; )
+	for (j = cgpu->threads ? cgpu->threads : 1; j--; )
 		mt_enable(cgpu->thr[j]);
 }
 
@@ -11551,7 +11551,7 @@ void cgpu_set_defaults(struct cgpu_info * const cgpu)
 			case SDR_OK:
 				applog(LOG_DEBUG, "%"PRIpreprv": Applied rule %s%s%s",
 				       cgpu->proc_repr, setstr,
-				       p ? ": " : "", p ?: "");
+				       p ? ": " : "", p ? p : "");
 				break;
 			case SDR_ERR:
 			case SDR_HELP:
@@ -12180,7 +12180,7 @@ err:
 	
 	const int uri_sz = 0x30;
 	char * const uri = malloc(uri_sz);
-	snprintf(uri, uri_sz, "http%s://%s:%d/%s#allblocks", rpcssl ? "s" : "", rpcconnect ?: "localhost", rpcport, have_cbaddr ? "" : "#getcbaddr");
+	snprintf(uri, uri_sz, "http%s://%s:%d/%s#allblocks", rpcssl ? "s" : "", rpcconnect ? rpcconnect : "localhost", rpcport, have_cbaddr ? "" : "#getcbaddr");
 	
 	char hfuri[0x40];
 	if (rpcconnect)
@@ -12381,7 +12381,7 @@ void register_device(struct cgpu_info *cgpu)
 
 	if (!cgpu->proc_id)
 		cgpu->device_line_id = device_line_id_count++;
-	int thr_objs = cgpu->threads ?: 1;
+	int thr_objs = cgpu->threads ? cgpu->threads : 1;
 	mining_threads += thr_objs;
 	base_queue += thr_objs + cgpu->extra_work_queue;
 	{
@@ -12916,7 +12916,7 @@ int create_new_cgpus(void (*addfunc)(void*), void *arg)
 	for (i = 0; i < total_devices_new; ++i)
 	{
 		cgpu = devices_new[i];
-		mining_threads_new += cgpu->threads ?: 1;
+		mining_threads_new += cgpu->threads ? cgpu->threads : 1;
 	}
 	
 	wr_lock(&mining_thr_lock);
@@ -13563,7 +13563,7 @@ int main(int argc, char *argv[])
 				snprintf(buf, sizeof(buf), " %s", cgpu->name);
 			else
 			if (cgpu->dev_manufacturer)
-				snprintf(buf, sizeof(buf), " %s by %s", (cgpu->dev_product ?: "Device"), cgpu->dev_manufacturer);
+				snprintf(buf, sizeof(buf), " %s by %s", (cgpu->dev_product ? cgpu->dev_product : "Device"), cgpu->dev_manufacturer);
 			else
 			if (cgpu->dev_product)
 				snprintf(buf, sizeof(buf), " %s", cgpu->dev_product);

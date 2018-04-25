@@ -1715,7 +1715,7 @@ static bool opencl_thread_init(struct thr_info *thr)
 static
 float opencl_min_nonce_diff(struct cgpu_info * const proc, const struct mining_algorithm * const malgo)
 {
-	return malgo->opencl_min_nonce_diff ?: -1.;
+	return malgo->opencl_min_nonce_diff ? malgo->opencl_min_nonce_diff : -1.;
 }
 
 #ifdef USE_SHA256D

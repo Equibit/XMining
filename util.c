@@ -2159,8 +2159,8 @@ const char *extract_domain(size_t * const out_domainlen, const char * const uri,
 	}
 	if (!p)
 	{
-		p = memchr(uri, '?', urilen) ?:
-		    memchr(uri, '#', urilen) ?:
+		p = memchr(uri, '?', urilen) ? memchr(uri, '?', urilen) :
+		    memchr(uri, '#', urilen) ? memchr(uri, '#', urilen) :
 		    &uri[urilen];
 	}
 	

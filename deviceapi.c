@@ -121,7 +121,7 @@ float common_scrypt_min_nonce_diff(struct cgpu_info * const proc, const struct m
 bool hashes_done(struct thr_info *thr, int64_t hashes, struct timeval *tvp_hashes, uint32_t *max_nonce)
 {
 	struct cgpu_info *cgpu = thr->cgpu;
-	const long cycle = opt_log_interval / 5 ? : 1;
+	const long cycle = opt_log_interval / 5 ?  opt_log_interval / 5 : 1;
 	
 	if (unlikely(hashes == -1)) {
 		if (timer_elapsed(&cgpu->tv_device_last_not_well, NULL) > 0)

@@ -298,7 +298,7 @@ void bitforce_pci_gets(char * const buf, size_t bufLen, struct cgpu_info * const
 	bytes_t *b = &devdata->getsbuf;
 	
 	_bitforce_pci_read(dev);
-	ssize_t linelen = (bytes_find(b, '\n') + 1) ?: bytes_len(b);
+	ssize_t linelen = (bytes_find(b, '\n') + 1) ? (bytes_find(b, '\n') + 1) : bytes_len(b);
 	if (linelen > --bufLen)
 		linelen = bufLen;
 	
@@ -2152,7 +2152,7 @@ retry:
 			{
 				// NOTE: work is set to just-before the first item from the build-command loop earlier
 				// NOTE: This ugly statement ends up with the first work item queued
-				work = work ? (work->next ?: work) : thr->work_list;
+				work = work ? (work->next ? work->next : work) : thr->work_list;
 				for (int i = data->ready_to_queue; i > 0; --i, (work = work->next))
 				{
 					work->device_id = strtol(&p[1], &p, 0x10);
@@ -2336,7 +2336,7 @@ done:
 	     || (fcount > BITFORCE_GOAL_QRESULTS && bitforce->sleep_ms > BITFORCE_MIN_QRESULT_WAIT)  ))
 	{
 		unsigned int old_sleep_ms = bitforce->sleep_ms;
-		bitforce->sleep_ms = (uint32_t)bitforce->sleep_ms * BITFORCE_GOAL_QRESULTS / (fcount ?: 1);
+		bitforce->sleep_ms = (uint32_t)bitforce->sleep_ms * BITFORCE_GOAL_QRESULTS / (fcount ? fcount : 1);
 		if (bitforce->sleep_ms > BITFORCE_MAX_QRESULT_WAIT)
 			bitforce->sleep_ms = BITFORCE_MAX_QRESULT_WAIT;
 		if (bitforce->sleep_ms < BITFORCE_MIN_QRESULT_WAIT)

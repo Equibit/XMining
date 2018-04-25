@@ -31,7 +31,7 @@ void dclk_msg_freqchange(const char *repr, int oldFreq, int newFreq, const char 
 	       repr,
 	       (oldFreq > newFreq ? "dropped" : "raised "),
 	       oldFreq, newFreq,
-	       tail ?: ""
+	       tail ? tail : ""
 	);
 }
 

@@ -101,7 +101,7 @@ const char *bfg_json_obj_string(json_t *json, const char *key, const char *fail)
 	json = json_object_get(json, key);
 	if (!json)
 		return fail;
-	return json_string_value(json) ?: fail;
+	return json_string_value(json) ? json_string_value(json) : fail;
 }
 
 extern const char *__json_array_string(json_t *, unsigned int entry);
