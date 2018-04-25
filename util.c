@@ -70,13 +70,13 @@ bool successful_connect = false;
 struct timeval nettime;
 
 struct data_buffer {
-	void		*buf;
+	char		*buf;
 	size_t		len;
 	curl_socket_t	*idlemarker;
 };
 
 struct upload_buffer {
-	const void	*buf;
+	const char	*buf;
 	size_t		len;
 	size_t		pos;
 };
@@ -224,12 +224,12 @@ static int seek_data_cb(void *user_data, curl_off_t offset, int origin)
 }
 #endif
 
-static size_t resp_hdr_cb(void *ptr, size_t size, size_t nmemb, void *user_data)
+static size_t resp_hdr_cb(char *ptr, size_t size, size_t nmemb, void *user_data)
 {
 	struct header_info *hi = user_data;
 	size_t remlen, slen, ptrlen = size * nmemb;
 	char *rem, *val = NULL, *key = NULL;
-	void *tmp;
+	char *tmp;
 
 	val = calloc(1, ptrlen);
 	key = calloc(1, ptrlen);
