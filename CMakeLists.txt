@@ -404,6 +404,7 @@ set (bfgminer_SOURCES
     #bfgminer_rpc_SOURCES = api-example.c
     #bfgminer_rpc_LDADD = @WS2_LIBS@
 
+    cmake/windows/memmem.c
     )
 
 set (blkmaker_SOURCES
