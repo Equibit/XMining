@@ -86,7 +86,7 @@ BUILDING BFGMINER
 Everything you probably want, condensed:
 	build-essential autoconf automake libtool pkg-config libcurl4-gnutls-dev
 	libjansson-dev uthash-dev libncursesw5-dev libudev-dev libusb-1.0-0-dev
-	libevent-dev libmicrohttpd-dev hidapi
+	libevent-dev libmicrohttpd-dev libhidapi-dev
 
 Dependencies:
 	autoconf             http://www.gnu.org/software/autoconf/
@@ -112,7 +112,7 @@ Optional Dependencies:
 	  libudev-dev        http://www.freedesktop.org/software/systemd/libudev/
 	
 	HashBuster Nano & NanoFury USB devices:
-	  hidapi             https://github.com/signal11/hidapi
+	  libhidapi-dev      https://github.com/signal11/hidapi
 	
 	getwork server for Block Erupter Blades:
 	  libmicrohttpd-dev 0.9.5+  http://www.gnu.org/software/libmicrohttpd/
@@ -128,6 +128,7 @@ Optional Dependencies:
 	  clang 3.3+         http://clang.llvm.org/
 	  libclc             http://libclc.llvm.org/
 	  Mesa 9.2.0+        http://www.mesa3d.org/
+	  libsensors4-dev    https://github.com/groeck/lm-sensors
 	
 	ATi/AMD video card GPU mining (non-free):
 	  AMD APP SDK        http://developer.amd.com/tools/heterogeneous-computing/amd-accelerated-parallel-processing-app-sdk/
@@ -199,6 +200,8 @@ BFGMiner dependency configuration options:
 	--without-libudev       Autodetect FPGAs using libudev (default enabled)
 	--without-libusb        Compile using libusb (default enabled)
 	--without-sensors       Build with libsensors monitoring (default enabled)
+	--without-system-libbase58
+	                        Use bundled libbase58 rather than system one
 	--with-system-libblkmaker
 	                        Use system libblkmaker rather than bundled one
 	                        (default disabled)
