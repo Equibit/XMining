@@ -478,4 +478,10 @@ target_link_libraries (${TARGET_NAME}
     blkmaker
     libbase58
     libccan
+    ${CURL_LIBRARIES}
+    ${JANSSON_LIBRARIES}
+    ${THIRDPARTY_DIRECTORY}/pthread/pthread-win32-master/bin/Win32_MSVC2015.Debug/pthread_dll.lib
     )
+
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${THIRDPARTY_DIRECTORY}/curl/bin/libcurl-d.dll $<TARGET_FILE_DIR:${TARGET_NAME}>)
+add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${THIRDPARTY_DIRECTORY}/pthread/pthread-win32-master/bin/Win32_MSVC2015.Debug/pthread_dll.dll $<TARGET_FILE_DIR:${TARGET_NAME}>)
