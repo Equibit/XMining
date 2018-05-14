@@ -1,6 +1,17 @@
 #!/bin/bash
 
-cd /root/EQB-Mining/build/ubuntu
+SCRIPT=$(realpath $0)
+PROJECT_SOURCE=$(dirname $(dirname $(dirname ${SCRIPT})))
+PROJECT_BUILD=${PROJECT_SOURCE}/build/ubuntu
+
+echo ""
+echo "SCRIPT     = ${SCRIPT}"
+echo "SOURCE     = ${PROJECT_SOURCE}"
+echo "BUILD      = ${PROJECT_BUILD}"
+echo ""
+
+cd "${PROJECT_BUILD}" 
+
 if [ -f bfgminer ]; then 
    echo "Equibit miner found"
    mv bfgminer equibitminer
