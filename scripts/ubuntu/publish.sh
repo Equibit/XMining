@@ -19,6 +19,8 @@ if [ -f bfgminer ]; then
    cd MinerBinaries
    mkdir -p dev/0.1/
    cp equibitminer MinerBinaries/dev/0.1/
+   git config --global user.ghname "Harmeek Jhutty"
+   git config --global user.ghemail "hjhutty@coderise.io"
    git add equibitminer
    git commit -am "Committed Equibit Miner v0.1"
    git push origin
