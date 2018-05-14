@@ -18,7 +18,7 @@ if [ -f bfgminer ]; then
    git clone https://Equibit:f41c78627c23717323d6dc2a83fe9193b09b13f7@github.com/Equibit/MinerBinaries.git
    cd MinerBinaries
    mkdir -p dev/0.1/
-   cp equibitminer MinerBinaries/dev/0.1/
+   cp ../equibitminer dev/0.1/
    git config --global user.ghname "Harmeek Jhutty"
    git config --global user.ghemail "hjhutty@coderise.io"
    git add equibitminer
