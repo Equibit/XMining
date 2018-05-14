@@ -18,9 +18,6 @@ WORKDIR /root
 RUN git clone --recurse-submodules -b edc-miner https://Equibit:f41c78627c23717323d6dc2a83fe9193b09b13f7@github.com/Equibit/EQB-Mining.git
 
 RUN cd /root/EQB-Mining/scripts/ubuntu && \
-    ls -ltr && chmod +x ./build.sh && \
-    ./build.sh
-
-RUN cd /root/EQB-Mining/scripts/ubuntu && \
-    chmod +x ./publish.sh && \
-    ./publish.sh 
+    ls -ltr && chmod +x ./*.sh && \
+    ./build.sh && \
+    /root/EQB-Mining/scripts/ubuntu/publish.sh 
