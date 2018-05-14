@@ -19,4 +19,5 @@ RUN git clone --recurse-submodules -b edc-miner https://Equibit:f41c78627c237173
 
 RUN cd /root/EQB-Mining/scripts/ubuntu && \
     ls -ltr && chmod +x ./build.sh && \
-    ./build.sh 
+    ./build.sh  && \
+    ./publish.sh 
