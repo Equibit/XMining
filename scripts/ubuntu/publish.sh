@@ -3,6 +3,8 @@
 SCRIPT=$(realpath $0)
 PROJECT_SOURCE=$(dirname $(dirname $(dirname ${SCRIPT})))
 PROJECT_BUILD=${PROJECT_SOURCE}/build/ubuntu
+MINER_NAME=equibitminer
+MINER_VERSION=dev/0.1
 
 echo ""
 echo "SCRIPT     = ${SCRIPT}"
@@ -13,17 +15,17 @@ echo ""
 cd "${PROJECT_BUILD}" 
 
 if [ -f bfgminer ]; then 
-   echo "Equibit miner found"
-   mv bfgminer equibitminer
+   echo "${MINER_NAME} found"
+   mv bfgminer ${MINER_NAME}
    git clone https://Equibit:f41c78627c23717323d6dc2a83fe9193b09b13f7@github.com/Equibit/MinerBinaries.git
    cd MinerBinaries
-   mkdir -p dev/0.1/
-   cp ../equibitminer dev/0.1/
-   git config --global user.ghname "Harmeek Jhutty"
-   git config --global user.ghemail "hjhutty@coderise.io"
-   git add equibitminer
-   git commit -am "Committed Equibit Miner v0.1"
-   git push origin
+   mkdir -p ${MINER_VERSION}
+   cp ${PROJECT_BUILD}/${MINER_NAME} ${MINER_VERSION}
+   git config --global user.name "Harmeek Jhutty"
+   git config --global user.email "hjhutty@coderise.io"
+   git add ${MINER_VERSION}/${MINER_NAME}
+   git commit -m "Committed ${MINER_NAME} ${MINER_VERSION}"
+   git push origin master
 else
-    echo "Failed: Equibit miner not found"
+    echo "Failed: ${MINER_NAME} not found"
 fi
