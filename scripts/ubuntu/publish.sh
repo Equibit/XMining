@@ -4,7 +4,7 @@ SCRIPT=$(realpath $0)
 PROJECT_SOURCE=$(dirname $(dirname $(dirname ${SCRIPT})))
 PROJECT_BUILD=${PROJECT_SOURCE}/build/ubuntu
 MINER_NAME=equibitminer
-MINER_VERSION=dev/0.1
+MINER_VERSION=dev/0.1/$(date +%Y%m%d%H%M%S)
 
 echo ""
 echo "SCRIPT     = ${SCRIPT}"
