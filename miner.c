@@ -121,6 +121,7 @@ struct strategies strategies[] = {
 };
 
 #define packagename bfgminer_name_space_ver
+#define EQB_VERSION "0.1.1-w"
 
 bool opt_protocol;
 bool opt_dev_protocol;
@@ -3036,6 +3037,8 @@ extern const char *opt_argv0;
 static
 void bfg_versioninfo(void)
 {
+    
+        printf("Equibitminer %s\n", EQB_VERSION);
 	puts(packagename);
 	printf("  Lowlevel:%s\n", BFG_LOWLLIST);
 	printf("  Drivers:%s\n", BFG_DRIVERLIST);
